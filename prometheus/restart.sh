@@ -2,6 +2,7 @@ docker stop prometheus
 docker rm prometheus
 docker run -d \
   --name prometheus \
+  --link api \
   -v "$(pwd)/prometheus-data":/prometheus-data \
   -p 9090:9090 \
   prom/prometheus \
