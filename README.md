@@ -12,16 +12,28 @@ Prerequisites
 - Docker
 - Bash
 
-Terminal 1:
+Note: on Windows, use Docker Desktop with WSL2 back-end, and run from Ubuntu
+
+## Terminal 1: Web API
 
 ```
 (cd node && ./restart.sh)
 ```
 
-Terminal 2:
+http://localhost:8080/
+
+## Terminal 2: Prometheus
 
 ```
 (cd prometheus && ./restart.sh)
 ```
 
-Note: on Windows, use Docker Desktop with WSL2 back-end, and run from Ubuntu
+http://localhost:9090/graph
+
+## Terminal 3: Grafana
+
+```
+(cd grafana && ./restart.sh)
+```
+
+http://localhost:3000/

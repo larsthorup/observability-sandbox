@@ -3,7 +3,7 @@ const client = require('prom-client')
 const collectDefaultMetrics = client.collectDefaultMetrics
 collectDefaultMetrics({ timeout: 1000 })
 
-const port = 3000;
+const port = 8080;
 const host = '0.0.0.0';
 
 const app = express();
