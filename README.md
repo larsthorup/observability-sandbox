@@ -37,3 +37,5 @@ http://localhost:9090/graph
 ```
 
 http://localhost:3000/
+
+Username/password: lars/lars
