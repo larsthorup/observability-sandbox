@@ -12,6 +12,14 @@ Prerequisites
 - Docker
 - Bash
 
+Terminal 1:
+
+```
+(cd node && ./restart.sh)
+```
+
+Terminal 2:
+
 ```
 (cd prometheus && ./restart.sh)
 ```

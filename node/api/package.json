@@ -1,0 +1,11 @@
+{
+  "name": "observability-sandbox-api",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node api.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "prom-client": "^13.2.0"
+  }
+}

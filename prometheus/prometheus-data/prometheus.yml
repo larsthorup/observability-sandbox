@@ -5,5 +5,5 @@ scrape_configs:
     static_configs:
       - targets: ["127.0.0.1:3000"]
         labels:
-          service: "test-prom"
+          service: "API"
           group: "production"
