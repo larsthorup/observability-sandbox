@@ -3,8 +3,8 @@ docker rm prometheus
 docker run -d \
   --name prometheus \
   --link api \
-  -v "$(pwd)/prometheus-data":/prometheus-data \
+  -v "$(pwd)/data":/data \
   -p 9090:9090 \
   prom/prometheus \
-  --config.file=/prometheus-data/prometheus.yml
+  --config.file=/data/prometheus.yml
 docker logs -f prometheus
