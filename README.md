@@ -27,7 +27,7 @@ sudo mkdir /mnt/docker
 sudo mount -t drvfs h: /mnt/docker
 ```
 
-## Terminal 1: Prometheus (observation store)
+## Terminal: Prometheus (observation store)
 
 ```
 (cd prometheus && ./restart.sh)
@@ -35,7 +35,7 @@ sudo mount -t drvfs h: /mnt/docker
 
 http://localhost:9090/graph
 
-## Terminal 2: Loki (log store)
+## Terminal: Loki (log store)
 
 ```
 (cd loki && ./restart.sh)
@@ -43,15 +43,7 @@ http://localhost:9090/graph
 
 http://localhost:3100/metrics
 
-## Terminal 3: Promtail (log collector)
-
-```
-(cd promtail && ./restart.sh)
-```
-
-http://localhost:9080/
-
-## Terminal 4: Grafana (observability visualization)
+## Terminal: Grafana (observability visualization)
 
 ```
 (cd grafana && ./restart.sh)
@@ -61,7 +53,7 @@ http://localhost:3000/
 
 Username/password: lars/lars
 
-## Terminal 5: Web API (our code)
+## Terminal: Web API (our code)
 
 ```
 (cd nodejs && ./restart.sh)
@@ -70,3 +62,11 @@ Username/password: lars/lars
 http://localhost:8080/
 
 ![Sample display](./media/grafana-dashboard.png)
+
+## Terminal: Promtail (log collector)
+
+```
+(cd promtail && ./restart.sh)
+```
+
+http://localhost:9080/

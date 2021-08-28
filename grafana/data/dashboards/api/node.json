@@ -189,6 +189,35 @@
       ],
       "title": "Response Time",
       "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 3,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "expr": "{service=\"api\"}",
+          "queryType": "randomWalk",
+          "refId": "A"
+        }
+      ],
+      "title": "Output",
+      "type": "logs"
     }
   ],
   "refresh": "5s",

@@ -18,14 +18,27 @@ scrape_configs:
       - targets: # tells promtail to look for the logs on the current machine/host
           - localhost
         labels: # labels with which all the following logs should be labelled
-          job: my-container
+          service: api
           host: localhost
-          __path__: /var/lib/docker/containers/*/*.log
-          # __path__ denotes the path of the actual log file whose logs will be scraped
-          # and shipped to loki indexed with the above labels
+          __path__: /var/lib/docker/containers/${API_CONTAINERID}*/${API_CONTAINERID}*.log
 
-          # TODO: put different labels on different containers
-          # https://grafana.com/docs/loki/latest/clients/promtail/configuration/#use-environment-variables-in-the-configuration
-          # docker ps --format {{.ID}} --filter "name=api"
+      - targets: # tells promtail to look for the logs on the current machine/host
+          - localhost
+        labels: # labels with which all the following logs should be labelled
+          service: grafana
+          host: localhost
+          __path__: /var/lib/docker/containers/${GRAFANA_CONTAINERID}*/${GRAFANA_CONTAINERID}*.log
 
-          # TODO: grafana logview
+      - targets: # tells promtail to look for the logs on the current machine/host
+          - localhost
+        labels: # labels with which all the following logs should be labelled
+          service: loki
+          host: localhost
+          __path__: /var/lib/docker/containers/${LOKI_CONTAINERID}*/${LOKI_CONTAINERID}*.log
+
+      - targets: # tells promtail to look for the logs on the current machine/host
+          - localhost
+        labels: # labels with which all the following logs should be labelled
+          service: prometheus
+          host: localhost
+          __path__: /var/lib/docker/containers/${PROMETHEUS_CONTAINERID}*/${PROMETHEUS_CONTAINERID}*.log
