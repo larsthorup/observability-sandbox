@@ -39,3 +39,5 @@ http://localhost:9090/graph
 http://localhost:3000/
 
 Username/password: lars/lars
+
+![Sample display](./media/grafana-dashboard.png)
