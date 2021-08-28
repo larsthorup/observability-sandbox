@@ -1,3 +1,4 @@
+echo -e "\e]2;prometheus\a"
 docker stop prometheus
 docker rm prometheus
 docker run -d \

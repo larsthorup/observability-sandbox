@@ -18,10 +18,20 @@ const app = express();
 app.get('/', async (req, res) => {
   const timer = apiRootRequestDurationSeconds.startTimer();
   apiRootRequestsTotalCounter.inc();
-  const delay = Math.random() * 1000;
-  await new Promise(resolve => setTimeout(resolve, delay));
-  res.send('Hello World');
-  apiRootRequestDurationSeconds.observe(timer());
+  try {
+    const delay = Math.random() * 1000;
+    await new Promise(resolve => setTimeout(resolve, delay));
+    const shouldError = Math.random() < 0.1;
+    if (shouldError) throw new Error('Uh, oh, random fluke!')
+    const message = 'Hello World';
+    console.log(message);
+    res.send(message);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  } finally {
+    apiRootRequestDurationSeconds.observe(timer());
+  }
 });
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', client.register.contentType)

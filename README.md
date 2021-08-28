@@ -1,28 +1,33 @@
 # observability-sandbox
 
-Open Source monitoring, logging and tracing with Prometheus and Grafana for:
+Open Source monitoring, logging and tracing with Prometheus, Loki and Grafana for:
 
 - Host (CPU, memory, storage)
 - Database
 - Web API
 - Front-end
 
-Prerequisites
+## Prerequisites
 
 - Docker
 - Bash
 
-Note: on Windows, use Docker Desktop with WSL2 back-end, and run from Ubuntu
+## Prerequisites (Windows)
 
-## Terminal 1: Web API
+In Windows Command Prompt:
 
 ```
-(cd node && ./restart.sh)
+net use h: \\wsl$\docker-desktop-data
 ```
 
-http://localhost:8080/
+For the remaining steps use Docker Desktop with WSL2 back-end, and run from Ubuntu
 
-## Terminal 2: Prometheus
+```
+sudo mkdir /mnt/docker
+sudo mount -t drvfs h: /mnt/docker
+```
+
+## Terminal 1: Prometheus (observation store)
 
 ```
 (cd prometheus && ./restart.sh)
@@ -30,7 +35,23 @@ http://localhost:8080/
 
 http://localhost:9090/graph
 
-## Terminal 3: Grafana
+## Terminal 2: Loki (log store)
+
+```
+(cd loki && ./restart.sh)
+```
+
+http://localhost:3100/metrics
+
+## Terminal 3: Promtail (log collector)
+
+```
+(cd promtail && ./restart.sh)
+```
+
+http://localhost:9080/
+
+## Terminal 4: Grafana (observability visualization)
 
 ```
 (cd grafana && ./restart.sh)
@@ -39,5 +60,13 @@ http://localhost:9090/graph
 http://localhost:3000/
 
 Username/password: lars/lars
+
+## Terminal 5: Web API (our code)
+
+```
+(cd nodejs && ./restart.sh)
+```
+
+http://localhost:8080/
 
 ![Sample display](./media/grafana-dashboard.png)
