@@ -61,8 +61,6 @@ Username/password: lars/lars
 
 http://localhost:8080/
 
-![Sample display](./media/grafana-dashboard.png)
-
 ## Terminal: Promtail (log collector)
 
 ```
@@ -70,3 +68,9 @@ http://localhost:8080/
 ```
 
 http://localhost:9080/
+
+## Sample display
+
+http://localhost:3000/d/api/node-js
+
+![Sample display](./media/grafana-dashboard.png)
