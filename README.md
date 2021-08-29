@@ -59,7 +59,7 @@ Username/password: lars/lars
 (cd nodejs && ./restart.sh)
 ```
 
-http://localhost:8080/
+http://localhost:8080/greet?name=Lars
 
 ## Terminal: Promtail (log collector)
 
@@ -68,6 +68,14 @@ http://localhost:8080/
 ```
 
 http://localhost:9080/
+
+## Terminal: CDN (our code)
+
+```
+(cd cdn && ./restart.sh)
+```
+
+http://localhost:8081/
 
 ## Sample display
 
