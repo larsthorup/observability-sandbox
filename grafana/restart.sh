@@ -6,6 +6,7 @@ docker run -d \
   --link prometheus \
   --link loki \
   -v "$(pwd)/data":/etc/grafana \
+  --log-opt "tag={{.Name}}" \
   -p 3000:3000 \
   grafana/grafana
 docker logs -f grafana

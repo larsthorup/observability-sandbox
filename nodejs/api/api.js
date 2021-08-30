@@ -8,11 +8,11 @@ const host = '0.0.0.0';
 const collectDefaultMetrics = client.collectDefaultMetrics;
 collectDefaultMetrics({ timeout: 1000 });
 const apiGreetRequestsTotalCounter = new client.Counter({
-  name: 'api_root_requests_total',
+  name: 'api_greet_requests_total',
   help: 'Total number of requests to http://api/greet',
 });
 const apiGreetRequestDurationSeconds = new client.Histogram({
-  name: 'api_root_request_duration_seconds',
+  name: 'api_greet_request_duration_seconds',
   help: 'Total number of requests to http://api/greet',
   buckets: [0.001, 0.05, 0.15, 0.50, 1.00, 5.00],
 });

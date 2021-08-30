@@ -20,11 +20,20 @@ scrape_configs:
             output: log
             stream: stream
             timestamp: time
+            attrs:
+      - json:
+          expressions:
+            tag:
+          source: attrs
       - template:
           source: level
           template: '{{ if eq .stream "stderr" }}error{{ else }}info{{ end }}'
+      - regex:
+          expression: (?P<service>(.*))
+          source: tag
       - labels:
           level:
+          service:
       - timestamp:
           source: timestamp
           format: RFC3339Nano
@@ -32,27 +41,5 @@ scrape_configs:
       - targets: # tells promtail to look for the logs on the current machine/host
           - localhost
         labels: # labels with which all the following logs should be labelled
-          service: api
           host: localhost
-          __path__: /var/lib/docker/containers/${API_CONTAINERID}*/${API_CONTAINERID}*.log
-
-      - targets: # tells promtail to look for the logs on the current machine/host
-          - localhost
-        labels: # labels with which all the following logs should be labelled
-          service: grafana
-          host: localhost
-          __path__: /var/lib/docker/containers/${GRAFANA_CONTAINERID}*/${GRAFANA_CONTAINERID}*.log
-
-      - targets: # tells promtail to look for the logs on the current machine/host
-          - localhost
-        labels: # labels with which all the following logs should be labelled
-          service: loki
-          host: localhost
-          __path__: /var/lib/docker/containers/${LOKI_CONTAINERID}*/${LOKI_CONTAINERID}*.log
-
-      - targets: # tells promtail to look for the logs on the current machine/host
-          - localhost
-        labels: # labels with which all the following logs should be labelled
-          service: prometheus
-          host: localhost
-          __path__: /var/lib/docker/containers/${PROMETHEUS_CONTAINERID}*/${PROMETHEUS_CONTAINERID}*.log
+          __path__: /var/lib/docker/containers/*/*.log

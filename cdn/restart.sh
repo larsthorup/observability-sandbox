@@ -4,6 +4,7 @@ docker rm cdn
 docker build static -t larsthorup/observability-sandbox-cdn
 docker run -d \
   --name cdn \
+  --log-opt "tag={{.Name}}" \
   -p 8081:8081 \
   larsthorup/observability-sandbox-cdn
 docker logs -f cdn

@@ -4,6 +4,7 @@ docker rm loki
 docker run -d \
   --name loki \
   -v "$(pwd)/data":/data \
+  --log-opt "tag={{.Name}}" \
   -p 3100:3100 \
   grafana/loki:2.3.0 \
   --config.file=/data/loki-config.yml

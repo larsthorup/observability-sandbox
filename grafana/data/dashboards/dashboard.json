@@ -103,7 +103,7 @@
           "refId": "A"
         }
       ],
-      "title": "Heap",
+      "title": "API Heap",
       "type": "timeseries"
     },
     {
@@ -180,14 +180,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(rate(api_root_request_duration_seconds_sum[1m])) / sum(rate(api_root_request_duration_seconds_count[1m]))",
+          "expr": "sum(rate(api_greet_request_duration_seconds_sum[1m])) / sum(rate(api_greet_request_duration_seconds_count[1m]))",
           "interval": "",
           "legendFormat": "",
           "queryType": "randomWalk",
           "refId": "A"
         }
       ],
-      "title": "Response Time",
+      "title": "'/greet' Response Time",
       "type": "timeseries"
     },
     {
@@ -216,7 +216,7 @@
           "refId": "A"
         }
       ],
-      "title": "Output",
+      "title": "API Output",
       "type": "logs"
     }
   ],
@@ -233,7 +233,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Node.js",
-  "uid": "api",
+  "title": "Observability Sandbox",
+  "uid": "obs",
   "version": 0
 }

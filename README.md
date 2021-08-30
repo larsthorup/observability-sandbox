@@ -20,65 +20,43 @@ In Windows Command Prompt:
 net use h: \\wsl$\docker-desktop-data
 ```
 
-For the remaining steps use Docker Desktop with WSL2 back-end, and run from Ubuntu
+For the remaining steps use Docker Desktop with WSL2 back-end, and run from Git Bash
 
 ```
 sudo mkdir /mnt/docker
 sudo mount -t drvfs h: /mnt/docker
 ```
 
-## Terminal: Prometheus (observation store)
+## Start all services
 
 ```
-(cd prometheus && ./restart.sh)
+docker-compose up --build
 ```
 
-http://localhost:9090/graph
+## Use services
 
-## Terminal: Loki (log store)
+- Front-end (our code): http://localhost:8081/
+- API (our code): http://localhost:8080/greet?name=Lars
+- Grafana (visualization): http://localhost:3000 (auth: lars/lars)
+- Prometheus (metric store): http://localhost:9090/graph
+- Loki (log store): http://localhost:3100/ready
+- Promtail (log collector): http://localhost:9080/
+
+## Start services individually
+
+Instead of using docker-compose, each service can be started individually:
 
 ```
 (cd loki && ./restart.sh)
-```
-
-http://localhost:3100/metrics
-
-## Terminal: Grafana (observability visualization)
-
-```
-(cd grafana && ./restart.sh)
-```
-
-http://localhost:3000/
-
-Username/password: lars/lars
-
-## Terminal: Web API (our code)
-
-```
-(cd nodejs && ./restart.sh)
-```
-
-http://localhost:8080/greet?name=Lars
-
-## Terminal: Promtail (log collector)
-
-```
 (cd promtail && ./restart.sh)
-```
-
-http://localhost:9080/
-
-## Terminal: CDN (our code)
-
-```
+(cd nodejs && ./restart.sh)
+(cd prometheus && ./restart.sh)
+(cd grafana && ./restart.sh)
 (cd cdn && ./restart.sh)
 ```
 
-http://localhost:8081/
-
 ## Sample display
 
-http://localhost:3000/d/api/node-js
+http://localhost:3000/d/obs/observability-sandbox
 
 ![Sample display](./media/grafana-dashboard.png)

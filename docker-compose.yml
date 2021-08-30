@@ -1,0 +1,55 @@
+version: "3.9"
+x-logging: &default-logging
+  driver: json-file
+  options:
+    tag: "{{.Name}}"
+services:
+  loki:
+    container_name: loki
+    image: grafana/loki
+    logging: *default-logging
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/data:/data
+    command: -config.file=/data/loki-config.yml
+  promtail:
+    container_name: promtail
+    image: grafana/promtail
+    logging: *default-logging
+    ports:
+      - "9080:9080"
+    env_file: .env
+    volumes:
+      - ./promtail/data:/data
+      - "${DOCKER_ROOT}/docker/containers:/var/lib/docker/containers"
+    command: -config.file=/data/promtail.yml
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    logging: *default-logging
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/data:/data
+    command: --config.file=/data/prometheus.yml
+  api:
+    container_name: api
+    build: nodejs/api
+    logging: *default-logging
+    ports:
+      - "8080:8080"
+  cdn:
+    container_name: cdn
+    build: cdn/static
+    logging: *default-logging
+    ports:
+      - "8081:8081"
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    logging: *default-logging
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/data:/etc/grafana

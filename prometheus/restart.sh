@@ -5,6 +5,7 @@ docker run -d \
   --name prometheus \
   --link api \
   -v "$(pwd)/data":/data \
+  --log-opt "tag={{.Name}}" \
   -p 9090:9090 \
   prom/prometheus \
   --config.file=/data/prometheus.yml
